@@ -6,6 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './tabs/Home';
 import LoginScreen from './tabs/Login';
 import PostsScreen from './tabs/Posts';
+import NewPostScreen from './tabs/NewPost';
 
 const RootStack = createNativeStackNavigator({
   screens: {
@@ -18,6 +19,9 @@ const RootStack = createNativeStackNavigator({
     },
     Posts: {
       screen: PostsScreen
+    },
+    NewPost: {
+      screen: NewPostScreen,
     }
   },
 });
