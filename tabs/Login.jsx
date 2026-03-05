@@ -1,8 +1,11 @@
+import * as React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import { StyleSheet, Text, View, Image, SafeAreaView, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function LoginScreen() {
     const navigation = useNavigation();
+    const [text, onChangeText] = React.useState('');
 
     return (
         <SafeAreaView style={styles.container}>
@@ -10,6 +13,12 @@ export default function LoginScreen() {
           <Text style={styles.text}>
             Enter your username to load your account:
           </Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeText}
+            value={text}
+            placeholder='Current username'
+          />
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('Posts')}
@@ -20,6 +29,12 @@ export default function LoginScreen() {
             Don't have an account? 
             Create a new one:
           </Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeText}
+            value={text}
+            placeholder='Enter new username'
+          />
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('Posts')}
@@ -49,6 +64,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    height: 40,
+    marginTop: 30,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: '#FFFFFF'
   },
   button: {
     backgroundColor: '#E5A900',

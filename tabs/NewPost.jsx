@@ -1,11 +1,23 @@
+import * as React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import { StyleSheet, Text, View, Image, SafeAreaView, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function NewPostScreen() {
     const navigation = useNavigation();
+    const [text, onChangeText] = React.useState('');
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.text}>Enter the text of your post here:</Text>
+            <TextInput
+                editable
+                multiline
+                numberOfLines={5}
+                maxLength={400}
+                onChangeText={text => onChangeText(text)}
+                value={text}
+                style={styles.textInput}
+            />
 
             {/* For now, the create new post button just loops back to the Posts page */}
             <TouchableOpacity
@@ -31,6 +43,15 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  textInput: {
+    padding: 10,
+    width: 300,
+    height: 100,
+    backgroundColor: '#FFFF',
+    borderColor: '#000',
+    borderWidth: 1,
+    margin: 12,
   },
   button: {
     backgroundColor: '#E5A900',

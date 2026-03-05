@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import {useNavigation} from '@react-navigation/native';
-import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
     const navigation = useNavigation();

@@ -1,5 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
-import { StyleSheet, Text, View, Image, SafeAreaView, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 //basic Posts page that a new user will see. Will be updated by an existing person's file
 export default function PostsScreen() {
@@ -25,6 +26,8 @@ export default function PostsScreen() {
  
 }
 
+//Hopefully will get any posts from the file. If there aren't any, just return generic text?
+//Nah we'll probably need another function that can iterate through "file" and for every post, determine how to display it
 function GetDisplay() {
     return (
         <Text style={styles.text}>
