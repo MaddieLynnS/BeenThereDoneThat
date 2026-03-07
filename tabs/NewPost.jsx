@@ -2,10 +2,19 @@ import * as React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { usePosts } from '../PostsContext';
 
 export default function NewPostScreen() {
     const navigation = useNavigation();
     const [text, onChangeText] = React.useState('');
+    const { addPost } = usePosts();
+
+  const onSave = () => {
+    if (text.trim().length === 0) return;
+    addPost(text.trim());
+    onChangeText(''); // Clear the input field
+  };
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.text}>Enter the text of your post here:</Text>
@@ -14,7 +23,7 @@ export default function NewPostScreen() {
                 multiline
                 numberOfLines={5}
                 maxLength={400}
-                onChangeText={text => onChangeText(text)}
+        onChangeText={onChangeText}
                 value={text}
                 style={styles.textInput}
             />
@@ -23,17 +32,13 @@ export default function NewPostScreen() {
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                    SavePost();
+                    onSave();
                     navigation.navigate('Posts')}}
                     >
                 <Text style={styles.buttonText}>Save Post</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )
-}
-
-function SavePost() {
-    console.log("OH MY YOU PUSHED THE BUTTON");
 }
 
 const styles = StyleSheet.create({

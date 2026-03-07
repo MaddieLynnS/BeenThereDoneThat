@@ -1,10 +1,14 @@
+import * as React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, TouchableOpacity, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { usePosts } from '../PostsContext';
 
 //basic Posts page that a new user will see. Will be updated by an existing person's file
 export default function PostsScreen() {
     const navigation = useNavigation();
+    const { posts } = usePosts();
+
     return (
         <SafeAreaView style={styles.container}>
             {/* // This button links to the NewPost page, where they can make a post to add that will show up here */}
@@ -15,25 +19,27 @@ export default function PostsScreen() {
                 <Text style={styles.buttonText}>Add new post</Text>
             </TouchableOpacity>
 
-            {/* //All previous posts will be displayed hereafter. If no posts, prompt to create one */}
-            <View>
-                <Text style={styles.text}>
-                    No posts yet! Click the button to create one!
-                </Text>
-            </View>
+            {posts.length === 0 ? (
+                <View>
+                    <Text style={styles.text}>
+                        No posts yet! Click the button to create one!
+                    </Text>
+                </View>
+            ) : (
+                <FlatList
+                    data={posts}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <View style={styles.postItem}>
+                            <Text style={styles.postTextDate}>{new Date(Number(item.id)).toLocaleDateString()}</Text>
+                            <Text style={styles.postText}>{item.text}</Text>
+                        </View>
+                    )}
+                />
+            )}
         </SafeAreaView>
     )
  
-}
-
-//Hopefully will get any posts from the file. If there aren't any, just return generic text?
-//Nah we'll probably need another function that can iterate through "file" and for every post, determine how to display it
-function GetDisplay() {
-    return (
-        <Text style={styles.text}>
-            No posts yet! Click the button to create one!
-        </Text>
-    )
 }
 
 const styles = StyleSheet.create({
@@ -43,27 +49,46 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  button: {
-    backgroundColor: '#E5A900',
-    height: 50,
-    width: 200,
-    marginTop: 30,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    lineHeight: 50
-  },
-  text: {
-    color: '#4AB1F7',
-    fontSize: 20,
-    textAlign: 'center'
-  }
+    },
+    button: {
+        backgroundColor: '#E5A900',
+        height: 50,
+        width: 200,
+        marginTop: 20,
+        margin: 30,
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    buttonText: {
+        color: '#FFFFFF',
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        lineHeight: 50
+    },
+    text: {
+        color: '#4AB1F7',
+        fontSize: 20,
+        textAlign: 'center'
+    },
+    postItem: {
+        backgroundColor: '#FFFFFF',
+        padding: 12,
+        marginVertical: 10,
+        marginHorizontal: 20,
+        borderRadius: 8,
+        borderColor: '#4AB1F7',
+        borderWidth: 1,
+    },
+    postText: {
+        color: '#333',
+        fontSize: 16,
+    },
+    postTextDate: {
+        fontWeight: 'bold',
+        color: '#000000',
+        fontSize: 16
+    }
 
 })

@@ -7,6 +7,7 @@ import HomeScreen from './tabs/Home';
 import LoginScreen from './tabs/Login';
 import PostsScreen from './tabs/Posts';
 import NewPostScreen from './tabs/NewPost';
+import { PostsProvider } from './PostsContext';
 
 const RootStack = createNativeStackNavigator({
   screens: {
@@ -29,5 +30,9 @@ const RootStack = createNativeStackNavigator({
 const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
-  return <Navigation />;
+  return (
+    <PostsProvider>
+      <Navigation />
+    </PostsProvider>
+  );
 }
