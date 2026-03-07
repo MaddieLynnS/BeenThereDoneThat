@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { usePosts } from '../PostsHandler';
 
 export default function LoginScreen() {
     const navigation = useNavigation();
     const [text, onChangeText] = React.useState('');
+    const { loadPosts, resetPosts } = usePosts();
 
     return (
         <SafeAreaView style={styles.container}>
@@ -21,34 +23,33 @@ export default function LoginScreen() {
           />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Posts')}
+            onPress={async () => {
+              try {
+                await loadPosts(text || 'posts');
+                navigation.navigate('Posts');
+              } catch (err) {
+                Alert.alert('Error', 'Could not load posts for that username');
+              }
+            }}
             >
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <Text style={styles.text}>
             Don't have an account? 
-            Create a new one:
+            Get started today!
           </Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangeText}
-            value={text}
-            placeholder='Enter new username'
-          />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Posts')}
+            onPress={() => {
+              resetPosts();
+              navigation.navigate('Posts');
+            }}
             >
             <Text style={styles.buttonText}>Create New</Text>
           </TouchableOpacity>
 
         </SafeAreaView>
     )
-
-}
-
-//Makes a save file for a new person "creating an account", returns name
-function NewPerson() {
 
 }
 
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
     height: 40,
     marginTop: 30,
     borderWidth: 1,
+    width: 150,
     padding: 10,
     borderRadius: 8,
     backgroundColor: '#FFFFFF'

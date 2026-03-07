@@ -7,7 +7,7 @@ import HomeScreen from './tabs/Home';
 import LoginScreen from './tabs/Login';
 import PostsScreen from './tabs/Posts';
 import NewPostScreen from './tabs/NewPost';
-import { PostsProvider } from './PostsContext';
+import { PostsProvider } from './PostsHandler';
 
 const RootStack = createNativeStackNavigator({
   screens: {

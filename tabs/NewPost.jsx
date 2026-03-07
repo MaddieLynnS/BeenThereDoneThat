@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { usePosts } from '../PostsContext';
+import { usePosts } from '../PostsHandler';
 
 export default function NewPostScreen() {
     const navigation = useNavigation();
