@@ -1,0 +1,45 @@
+# Been There, Done That: Journal App
+
+This is a simple app that lets you create basic posts and journal about what you did, a feeling you had, or something odd you experienced that day. You can input a filename after and the posts will be saved for later access.
+
+## Instructions for Build and Use
+
+Steps to build and/or run the software:
+
+1. You will need npm installed and up to date.
+2. Download the Expo app from the app store on your Android or Apple device.
+3. Run npx expo start --tunnel in the terminal. The app will bundle and a QR code will appear in the terminal
+4. Scan that code on your device in the Expo app. The app will then load on your phone.
+
+Instructions for using the software:
+
+1. Once the app has loaded, you can click through the various screens. Trying to enter any username won't work yet, so just create a post.
+2. Enter whatever text you'd like, then Save the post by clicking the button at the bottom of the Posts screen. Enter a username there.
+3. Upon returning to the app later, you can put that username in and your posts will be loaded anew. (This is local storage only for now)
+
+## Development Environment
+
+To recreate the development environment, you need the following software and/or libraries with the specified versions:
+
+* expo (I had to use SDK 54.0.0)
+* react-navigation/native and react-navigation-system
+* expo-file-system (mine resulted in a high security vulnerability, which I resolved with npm audit fix)
+
+## Useful Websites to Learn More
+
+I found these websites useful in developing this software:
+
+* [React Native Docs](https://reactnative.dev/docs/animations)
+* [Environment Setup](https://reactnative.dev/docs/environment-setup)
+* [React Navigation](https://reactnavigation.org/docs/params)
+* [React Native Tutorial w/ Mosh](https://www.youtube.com/watch?v=0-S5a0eXPoc)
+* [Expo Docs](https://docs.expo.dev/get-started/set-up-your-environment/)
+* [Steps for App Creation](https://www.geeksforgeeks.org/react-native/what-are-the-steps-to-create-first-react-native-app/)
+
+## Future Work
+
+The following items I plan to fix, improve, and/or add to this project in the future:
+
+* [ ] I'd like to incorporate more to the posts, including pictures and an optional title
+* [ ] I want to organize things a bit better and have better CSS (right now it's not the best)
+* [ ] It would also be nice to shrink posts so you can only see the first few lines onscreen, but clicking on it would open that post and let you see the full contents
